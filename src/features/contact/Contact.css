@@ -1,0 +1,130 @@
+.c-grid {
+  display: grid; grid-template-columns: 1fr 1.5fr;
+  gap: 60px; align-items: start;
+}
+.c-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 48px);
+  font-weight: 700; line-height: 1.0;
+  letter-spacing: .03em; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.c-desc {
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: var(--dim); margin-bottom: 32px; letter-spacing: .03em;
+}
+.c-info {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--line2);
+}
+.ci {
+  display: flex; align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+  transition: background .2s;
+}
+.ci:last-child { border-bottom: none; }
+.ci:hover { background: var(--accent-dim); }
+.ci-k {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); padding: 13px 14px;
+  border-right: 1px solid var(--line); min-width: 76px;
+}
+.ci-v {
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 300;
+  color: var(--dim); padding: 13px 14px; letter-spacing: .03em;
+}
+
+/* Form */
+.f-wrap { border: 1px solid var(--line2); }
+.f-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--line2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.f-header-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--accent);
+}
+.f-dots { display: flex; gap: 6px; }
+.f-dots span {
+  width: 8px; height: 8px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-dim);
+}
+
+.f-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.f-full { grid-template-columns: 1fr; }
+
+.f-field {
+  padding: 14px 18px; border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 5px;
+  transition: background .2s;
+}
+.f-field:focus-within { background: var(--accent-dim); }
+.f-field:last-child    { border-right: none; }
+.f-field-full          { border-right: none; }
+
+.f-label {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent);
+}
+.f-field input,
+.f-field select,
+.f-field textarea {
+  background: transparent; border: none; outline: none;
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: .05em;
+  color: var(--white); width: 100%; resize: none; padding: 2px 0;
+}
+.f-field select { cursor: pointer; appearance: none; }
+.f-field select option { background: var(--bg2); color: var(--white); }
+.f-field textarea { min-height: 88px; }
+.f-field input::placeholder,
+.f-field textarea::placeholder { color: var(--faint); }
+
+.f-submit button {
+  width: 100%; padding: 18px 20px;
+  background: var(--accent); color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700; letter-spacing: .25em; text-transform: uppercase;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all .25s var(--ease);
+  position: relative; overflow: hidden;
+}
+.f-submit button::before {
+  content: ''; position: absolute; inset: 0;
+  background: #c88a18;
+  transform: translateX(-101%);
+  transition: transform .3s var(--ease);
+}
+.f-submit button:hover::before { transform: translateX(0); }
+.f-submit button:disabled { opacity: .5; cursor: not-allowed; }
+.f-submit button span { position: relative; z-index: 1; }
+
+.f-status {
+  padding: 12px 18px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+}
+.f-status.ok  {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-top: 1px solid var(--accent-line);
+}
+.f-status.err {
+  background: rgba(200,0,0,.07); color: #ff6b6b;
+  border: 1px solid rgba(200,0,0,.2);
+}
+
+@media (max-width: 960px) {
+  .c-grid { grid-template-columns: 1fr; gap: 36px; }
+  .f-row  { grid-template-columns: 1fr; }
+  .f-field { border-right: none !important; border-bottom: 1px solid var(--line); }
+}

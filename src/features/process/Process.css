@@ -1,0 +1,68 @@
+.process { border-bottom: 1px solid var(--line2); }
+
+.proc-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 52px);
+  font-weight: 700; line-height: 1.0;
+  letter-spacing: .03em; text-transform: uppercase;
+  max-width: 600px; margin-bottom: 64px;
+}
+
+.proc-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line2);
+}
+.ps {
+  padding: 36px 26px; border-right: 1px solid var(--line2);
+  transition: background .3s; position: relative;
+}
+.ps:last-child { border-right: none; }
+.ps:hover { background: var(--accent-dim); }
+.ps:hover .ps-lbl  { color: var(--accent); }
+.ps:hover .ps-title { color: var(--accent); }
+
+.ps-n {
+  font-family: var(--font-display);
+  font-size: 60px; font-weight: 900;
+  color: rgba(232,160,32,0.07);
+  line-height: 1; margin-bottom: 10px;
+}
+.ps-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 10px;
+  transition: color .3s;
+}
+.ps-title {
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 10px; color: var(--white);
+  transition: color .3s;
+}
+.ps-desc {
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 300; line-height: 1.75;
+  color: var(--dim); letter-spacing: .02em;
+}
+
+.proc-banner {
+  margin-top: 2px;
+  border: 1px solid var(--line2); border-top: none;
+  padding: 26px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; background: var(--accent-dim);
+}
+.proc-banner-text {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .15em; color: var(--dim);
+}
+.proc-banner-text strong { color: var(--accent); }
+
+@media (max-width: 960px) {
+  .proc-steps { grid-template-columns: 1fr 1fr; }
+  .ps:nth-child(2) { border-right: none; }
+  .ps:nth-child(3) { border-top: 1px solid var(--line2); }
+  .ps:nth-child(4) { border-top: 1px solid var(--line2); border-right: none; }
+  .proc-banner { flex-direction: column; align-items: flex-start; gap: 14px; }
+}

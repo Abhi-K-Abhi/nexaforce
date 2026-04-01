@@ -1,0 +1,112 @@
+.team { border-bottom: 1px solid var(--line2); }
+
+.team-head {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: end; margin-bottom: 56px;
+}
+.team-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 52px);
+  font-weight: 700; line-height: 1.0;
+  letter-spacing: .03em; text-transform: uppercase;
+}
+.team-intro {
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: var(--dim); letter-spacing: .03em;
+}
+
+.team-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line2); margin-bottom: 2px;
+}
+.t-card {
+  padding: 26px 20px; border-right: 1px solid var(--line2);
+  transition: background .3s; position: relative; overflow: hidden;
+}
+.t-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent); transform: scaleY(0);
+  transition: transform .35s var(--ease); transform-origin: bottom;
+}
+.t-card:hover::before { transform: scaleY(1); }
+.t-card:last-child    { border-right: none; }
+.t-card:hover         { background: var(--accent-dim); }
+
+.t-avatar {
+  width: 46px; height: 46px;
+  border: 1px solid var(--accent-line);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 700;
+  color: var(--accent);
+  position: relative;
+}
+.t-avatar::after {
+  content: ''; position: absolute; bottom: -4px; right: -4px;
+  width: 8px; height: 8px;
+  background: var(--accent); border: 2px solid var(--bg);
+}
+.t-name {
+  font-family: var(--font-display);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 4px; color: var(--white);
+}
+.t-role {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 12px;
+}
+.t-type {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 8px; letter-spacing: .18em; text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.t-skills {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--dim); line-height: 1.8;
+}
+
+.team-cap {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line2);
+}
+.cap {
+  padding: 24px; border-right: 1px solid var(--line2);
+  display: flex; align-items: center; gap: 18px;
+}
+.cap:last-child { border-right: none; }
+.cap-v {
+  font-family: var(--font-display);
+  font-size: 34px; font-weight: 700;
+  color: var(--accent);
+}
+.cap-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dim);
+}
+.cap-sub {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--faint); margin-top: 3px;
+}
+
+@media (max-width: 960px) {
+  .team-head { grid-template-columns: 1fr; gap: 16px; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .t-card:nth-child(2n) { border-right: none; }
+  .t-card:nth-child(n+3) { border-top: 1px solid var(--line2); }
+  .team-cap { grid-template-columns: 1fr; }
+  .cap { border-right: none; border-bottom: 1px solid var(--line2); }
+  .cap:last-child { border-bottom: none; }
+}
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .t-card { border-right: none !important; }
+  .t-card:nth-child(n+2) { border-top: 1px solid var(--line2); }
+}

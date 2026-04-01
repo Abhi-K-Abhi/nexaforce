@@ -1,0 +1,162 @@
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+/* ── CSS VARIABLES ── */
+:root {
+  --bg:     #050505;
+  --bg2:    #0a0a0a;
+  --bg3:    #0f0f0f;
+  --white:  #ffffff;
+  --off:    #e8e8e8;
+  --dim:    #b8b8b8;        /* was #888 — crisp silver, readable on black  */
+  --faint:  #686868;        /* was #333 — visible mid-gray, not invisible  */
+  --line:   rgba(255,255,255,0.06);
+  --line2:  rgba(255,255,255,0.12);
+  --line3:  rgba(255,255,255,0.28);
+  --glow:   rgba(255,255,255,0.03);
+  --accent:      #e8a020;             /* amber gold — accent color         */
+  --accent-dim:  rgba(232,160,32,0.1);/* accent background tint            */
+  --accent-line: rgba(232,160,32,0.4);/* accent border                     */
+  --font-display: 'Orbitron', monospace;
+  --font-body:    'Exo 2', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+  --nav-h:  68px;
+  --ease:   cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── BASE ── */
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: crosshair;
+}
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); }
+::selection { background: var(--accent); color: var(--bg); }
+
+/* ── GRID OVERLAY (global) ── */
+.grid-overlay {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.scanline {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px
+  );
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--accent); border-radius: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .15s, height .15s;
+  mix-blend-mode: normal;
+}
+.cursor-ring {
+  position: fixed; width: 32px; height: 32px;
+  border: 1px solid var(--accent-line);
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s;
+}
+.cursor.hover      { width: 0; height: 0; }
+.cursor-ring.hover { width: 44px; height: 44px; border-color: var(--accent); }
+
+/* ── SECTION BASE ── */
+section { padding: 120px 48px; position: relative; z-index: 2; }
+
+/* ── SECTION LABEL ── */
+.s-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 48px;
+}
+.s-label::before { content: '//'; color: var(--accent-line); }
+.s-label-num { margin-left: auto; color: var(--faint); }
+
+/* ── SHARED BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 28px;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  border: 1px solid;
+  transition: all .25s var(--ease);
+  position: relative; overflow: hidden;
+}
+.btn span { position: relative; z-index: 1; }
+.btn::before {
+  content: ''; position: absolute; inset: 0;
+  transform: translateX(-101%);
+  transition: transform .3s var(--ease);
+}
+.btn:hover::before { transform: translateX(0); }
+
+/* Primary — amber fill */
+.btn-f {
+  background: var(--accent); color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.btn-f::before { background: #c88a18; }
+.btn-f:hover   { color: var(--bg); }
+
+/* Ghost — white outline, fills amber on hover */
+.btn-g {
+  background: transparent; color: var(--white);
+  border-color: var(--line3);
+}
+.btn-g::before { background: var(--accent); }
+.btn-g:hover   { color: var(--bg); border-color: var(--accent); }
+
+/* ── GHOST TEXT (outline heading) ── */
+.ghost {
+  display: block;
+  -webkit-text-stroke: 1px rgba(255,255,255,.2);
+  color: transparent;
+}
+
+/* ── TAGS ── */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 9px;
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  transition: all .2s;
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.d1 { transition-delay: .08s; }
+.reveal.d2 { transition-delay: .16s; }
+.reveal.d3 { transition-delay: .24s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  section { padding: 72px 20px; }
+}
