@@ -9,7 +9,6 @@
 ───────────────────────────────────────────────── */
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-
 import Navbar    from './layout/Navbar.jsx'
 import Footer    from './layout/Footer.jsx'
 import Hero      from './features/hero/Hero.jsx'
@@ -79,6 +78,32 @@ export default function App() {
       if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100)
     }
   }, [location])
+
+  /* ── Page title updates as user scrolls ── */
+  useEffect(() => {
+    const sections = [
+      { id: 'hero',      title: 'NexaForce — Global IT Consultancy' },
+      { id: 'services',  title: 'Services | NexaForce' },
+      { id: 'process',   title: 'Process | NexaForce' },
+      { id: 'portfolio', title: 'Work | NexaForce' },
+      { id: 'team',      title: 'Team | NexaForce' },
+      { id: 'contact',   title: 'Contact | NexaForce' },
+    ]
+
+    const onScroll = () => {
+      const offset = 120
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i].id)
+        if (el && el.getBoundingClientRect().top <= offset) {
+          document.title = sections[i].title
+          break
+        }
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
