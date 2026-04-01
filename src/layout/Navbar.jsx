@@ -25,6 +25,13 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [onScroll])
 
+  /* ── Auto-close mobile menu on scroll ── */
+  useEffect(() => {
+    const closeOnScroll = () => { if (mobileOpen) setMobileOpen(false) }
+    window.addEventListener('scroll', closeOnScroll, { passive: true })
+    return () => window.removeEventListener('scroll', closeOnScroll)
+  }, [mobileOpen])
+
   const handleNav = (e, href) => {
     e.preventDefault()
     const el = document.getElementById(href.replace('#', ''))
