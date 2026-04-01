@@ -1,6 +1,20 @@
 import { useRevealAll } from '../../hooks/useReveal.js'
+import { useCounterValue } from '../../hooks/useCounter.js'
 import { PORTFOLIO } from '../../data/index.js'
 import './Portfolio.css'
+
+/* ── Animated metric per card ── */
+function AnimatedMetric({ metric }) {
+  const { value, ref } = useCounterValue(metric.num, 1200)
+  return (
+    <div className="p-metric" ref={ref}>
+      <span className="p-mv">
+        {value}{metric.suffix}
+      </span>
+      <span className="p-ml">{metric.label}</span>
+    </div>
+  )
+}
 
 export default function Portfolio() {
   const ref = useRevealAll()
@@ -33,10 +47,7 @@ export default function Portfolio() {
                 <span key={t} className="p-tag">{t}</span>
               ))}
             </div>
-            <div className="p-metric">
-              <span className="p-mv">{item.metric.val}</span>
-              <span className="p-ml">{item.metric.label}</span>
-            </div>
+            <AnimatedMetric metric={item.metric} />
           </div>
         ))}
       </div>

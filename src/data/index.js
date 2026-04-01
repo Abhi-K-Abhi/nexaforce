@@ -95,7 +95,7 @@ export const PORTFOLIO = [
     title: 'Real-Time Trading Analytics Platform',
     desc: 'High-throughput data pipeline and React dashboard for a London investment firm, processing millions of events daily with sub-100ms latency.',
     tags: ['React', 'Kafka', 'Python', 'AWS'],
-    metric: { val: '2M+', label: 'Events / Day' },
+    metric: { num: 2, suffix: 'M+', label: 'Events / Day' },
   },
   {
     id: 'triage',
@@ -103,7 +103,7 @@ export const PORTFOLIO = [
     title: 'AI-Powered Patient Triage System',
     desc: 'NLP triage assistant for a Berlin hospital network, reducing average patient wait-time through intelligent symptom analysis and routing.',
     tags: ['LangChain', 'FastAPI', 'PostgreSQL', 'Docker'],
-    metric: { val: '34%', label: 'Wait Time Reduction' },
+    metric: { num: 34, suffix: '%', label: 'Wait Time Reduction' },
   },
   {
     id: 'marketplace',
@@ -111,7 +111,7 @@ export const PORTFOLIO = [
     title: 'Multi-Vendor Marketplace Rebuild',
     desc: 'Complete replatforming from a legacy PHP monolith to modern microservices, handling Black Friday peaks with zero downtime.',
     tags: ['Next.js', 'Node.js', 'Redis', 'Kubernetes'],
-    metric: { val: '50K', label: 'Concurrent Users Peak' },
+    metric: { num: 50, suffix: 'K', label: 'Concurrent Users Peak' },
   },
   {
     id: 'supply',
@@ -119,7 +119,7 @@ export const PORTFOLIO = [
     title: 'Supply Chain Intelligence Dashboard',
     desc: 'Predictive supply chain tool for a Dubai logistics company, cutting excess inventory costs significantly in the first operating quarter.',
     tags: ['Python', 'Spark', 'Tableau', 'Azure'],
-    metric: { val: '22%', label: 'Inventory Cost Reduction' },
+    metric: { num: 22, suffix: '%', label: 'Inventory Cost Reduction' },
   },
 ]
 
