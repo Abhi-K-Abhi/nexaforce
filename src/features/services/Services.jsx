@@ -39,6 +39,25 @@ export default function Services() {
           </div>
         ))}
       </div>
+
+      {/* CTA banner after services grid */}
+      <div className="svc-banner reveal d2">
+        <div className="svc-banner-text">
+          Need something specific? <strong>Let's talk.</strong>
+        </div>
+        <a  href="#contact"
+          className="btn btn-f"
+          onClick={(e) => {
+            e.preventDefault()
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+            window.history.pushState(null, '', '#contact')
+          }}
+        >
+          <span>Start a Conversation</span>
+          <span>→</span>
+        </a>
+      </div>
+
     </section>
   )
 }

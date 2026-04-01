@@ -80,3 +80,32 @@
   .sc-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--line2) !important; }
   .sc-card:last-child { border-bottom: none !important; }
 }
+
+/* ── Services CTA banner ── */
+.svc-banner {
+  margin-top: 2px;
+  border: 1px solid var(--line2);
+  border-top: none;
+  padding: 26px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--accent-dim);
+}
+.svc-banner-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--dim);
+}
+.svc-banner-text strong {
+  color: var(--accent);
+}
+@media (max-width: 960px) {
+  .svc-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
