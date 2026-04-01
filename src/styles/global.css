@@ -131,7 +131,7 @@ section { padding: 120px 48px; position: relative; z-index: 2; }
 /* ── GHOST TEXT (outline heading) ── */
 .ghost {
   display: block;
-  -webkit-text-stroke: 1px rgba(255,255,255,.2);
+  -webkit-text-stroke: 1px rgba(232,160,32,.5);
   color: transparent;
 }
 
