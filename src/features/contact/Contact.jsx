@@ -31,9 +31,30 @@ export default function Contact() {
   const formRef    = useRef(null)
   const sectionRef = useRevealAll()
 
-  const [status,  setStatus]  = useState('idle') // idle | sending | ok | err
+  const [status,  setStatus]  = useState('idle')
   const [btnText, setBtnText] = useState('Send Inquiry')
+  const [errors,  setErrors]  = useState({})
 
+
+  /* Validate fields — returns error object, empty = valid */
+  const validate = (form) => {
+    const e = {}
+    const d = new FormData(form)
+    if (!d.get('from_name')?.trim())
+      e.from_name = 'Name is required'
+    if (!d.get('company')?.trim())
+      e.company = 'Company is required'
+    const email = d.get('reply_to')?.trim()
+    if (!email)
+      e.reply_to = 'Email is required'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      e.reply_to = 'Enter a valid email'
+    if (!d.get('service'))
+      e.service = 'Please select a service'
+    if (!d.get('message')?.trim())
+      e.message = 'Please describe your project'
+    return e
+  }
   /* Init EmailJS once on mount */
   useEffect(() => {
     if (EMAIL_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
@@ -43,6 +64,14 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    /* Run validation first */
+    const errs = validate(formRef.current)
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs)
+      return
+    }
+    setErrors({})
     setStatus('sending')
     setBtnText('Transmitting...')
 
@@ -112,26 +141,26 @@ export default function Contact() {
             </div>
 
             <div className="f-row">
-              <Field label="Full Name *">
-                <input type="text" name="from_name" placeholder="Jane Smith" required />
+              <Field label="Full Name *" error={errors.from_name}>
+                <input type="text" name="from_name" placeholder="Jane Smith" />
               </Field>
-              <Field label="Company *">
-                <input type="text" name="company" placeholder="Acme Corp" required />
+              <Field label="Company *" error={errors.company}>
+                <input type="text" name="company" placeholder="Acme Corp" />
               </Field>
             </div>
 
             <div className="f-row">
-              <Field label="Email *">
-                <input type="email" name="reply_to" placeholder="jane@acme.com" required />
+              <Field label="Email *" error={errors.reply_to}>
+                <input type="email" name="reply_to" placeholder="jane@acme.com" />
               </Field>
-              <Field label="Country">
+              <Field label="Country" error={errors.country}>
                 <input type="text" name="country" placeholder="United Kingdom" />
               </Field>
             </div>
 
             <div className="f-row">
-              <Field label="Service *">
-                <select name="service" required defaultValue="">
+              <Field label="Service *" error={errors.service}>
+                <select name="service" defaultValue="">
                   <option value="" disabled>Select service</option>
                   {SERVICES_LIST.map(s => <option key={s}>{s}</option>)}
                 </select>
@@ -160,11 +189,10 @@ export default function Contact() {
             </div>
 
             <div className="f-row f-full">
-              <Field label="Project Brief *" fullWidth>
+              <Field label="Project Brief *" fullWidth error={errors.message}>
                 <textarea
                   name="message"
                   placeholder="Describe your project, stack preferences, team size, and requirements..."
-                  required
                 />
               </Field>
             </div>
@@ -199,11 +227,14 @@ export default function Contact() {
 }
 
 /* ── Reusable field wrapper ── */
-function Field({ label, children, fullWidth }) {
+function Field({ label, children, fullWidth, error }) {
   return (
-    <div className={`f-field${fullWidth ? ' f-field-full' : ''}`}>
+    <div className={`f-field${fullWidth ? ' f-field-full' : ''}${error ? ' f-field-err' : ''}`}>
       <label className="f-label">{label}</label>
       {children}
+      {error && <span className="f-err-msg">{error}</span>}
     </div>
   )
 }
+
+

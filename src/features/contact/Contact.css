@@ -128,3 +128,15 @@
   .f-row  { grid-template-columns: 1fr; }
   .f-field { border-right: none !important; border-bottom: 1px solid var(--line); }
 }
+
+/* ── Field validation styles ── */
+.f-field-err {
+  background: rgba(200, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(200, 0, 0, 0.3);
+}
+.f-err-msg {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: .1em;
+  color: #ff6b6b;
+  margin-top: 4px;
+}
