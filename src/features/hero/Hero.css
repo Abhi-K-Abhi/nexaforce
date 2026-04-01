@@ -104,7 +104,11 @@
   transition: color .3s;
 }
 .ti:hover { color: var(--accent); }
-.ti-sep { width: 1px; height: 10px; background: var(--accent-line); }
+.ti-diamond {
+  color: var(--accent);
+  font-size: 8px;
+  opacity: 0.7;
+}
 @keyframes tick {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }

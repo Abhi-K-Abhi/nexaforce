@@ -84,7 +84,7 @@ export default function Hero() {
         <div className="ticker-tr">
           {doubled.map((item, i) => (
             <span key={i} className="ti">
-              <span className="ti-sep" />
+              <span className="ti-diamond">◆</span>
               {item}
             </span>
           ))}
